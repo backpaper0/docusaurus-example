@@ -35,7 +35,7 @@ jobs:
           git fetch --no-tags --depth=1 origin gh-pages
           git checkout gh-pages
           buildPath=docs$(cat .sub-path)
-          if [ ${buildPath} = docs ] && ; then
+          if [ ${buildPath} = docs ] ; then
             # 以下の格納ディレクトリを除くファイル・ディレクトリを削除する
             # nightly ... developブランチに対応
             # セマンティックバージョン ... タグに対応
