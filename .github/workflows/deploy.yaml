@@ -25,13 +25,16 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
       - run: echo /${github.ref_name} > .sub-path
         if: ${{ github.event_name == 'workflow_dispatch' }}
-      - run: BASE_URL_SUB_PATH=$(cat .sub-path) npm run build -- --out-dir docs$(cat .sub-path)
+      - run: BASE_URL_SUB_PATH=$(cat .sub-path) npm run build -- --out-dir build$(cat .sub-path)
       - run: |
-          buildPath=docs$(cat .sub-path)
-          git add ${buildPath}
+          git rm -fr docs
+          git commi -m "Temporary"
+          mv build docs
+          git add docs
           git stash
           git fetch --no-tags --depth=1 origin gh-pages
           git checkout gh-pages
+          buildPath=docs$(cat .sub-path)
           if [ ${buildPath} = docs ] && ; then
             # 以下の格納ディレクトリを除くファイル・ディレクトリを削除する
             # nightly ... developブランチに対応
