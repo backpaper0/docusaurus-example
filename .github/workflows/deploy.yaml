@@ -20,7 +20,7 @@ jobs:
           git config --local user.name "Uragami Taichi(GitHub Actions)"
           git add docs/latest
           git stash
-          git checkout gh-pages
+          git checkout -b gh-pages origin/gh-pages
           git rm -f docs/latest
           git commit -m "WIP"
           git stash pop
