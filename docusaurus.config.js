@@ -4,6 +4,8 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+const subDirectory = 'latest';
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'My Site',
@@ -14,7 +16,7 @@ const config = {
   url: 'https://backpaper0.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/docusaurus-example/',
+  baseUrl: `/docusaurus-example/${subDirectory}`,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
