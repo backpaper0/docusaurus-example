@@ -33,7 +33,7 @@ jobs:
           fi
           echo **********
           git status
-          git branchs --all
+          git branches --all
           git remote -v
           echo **********
           git push origin gh-pages
