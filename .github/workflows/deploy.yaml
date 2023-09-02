@@ -22,9 +22,14 @@ jobs:
           git add docs/latest
           git stash
           git checkout gh-pages
-          git rm -fr --ignore-unmatch docs/latest
-          git commit -m "WIP"
-          git stash pop
-          git commit --amend -m "Update document"
+          if [ -d docs/latest ]; then
+            git rm -fr docs/latest
+            git commit -m "WIP"
+            git stash pop
+            git commit --amend -m "Update document"
+          else
+            git stash pop
+            git commit -m "Update document"
+          fi
           git push origin gh-pages
 
