@@ -13,7 +13,7 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://backpaper0.github.io',
+  url: `https://backpaper0.github.io/docusaurus-example/${subDirectory}`,
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: `/docusaurus-example/${subDirectory}`,
