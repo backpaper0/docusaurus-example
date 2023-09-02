@@ -28,7 +28,7 @@ jobs:
       - run: BASE_URL_SUB_PATH=$(cat .sub-path) npm run build -- --out-dir build$(cat .sub-path)
       - run: |
           git rm -fr docs
-          git commi -m "Temporary"
+          git commit -m "Temporary"
           mv build docs
           git add docs
           git stash
