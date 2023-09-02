@@ -40,7 +40,8 @@ jobs:
             # nightly ... developブランチに対応
             # セマンティックバージョン ... タグに対応
             # 整数 ... プルリクエストに対応
-            git rm -fr --ignore-unmatch $(ls docs|grep -vE '^(\d+|\d+\.\d+\.\d+|nightly)$')
+            cd docs
+            git rm -fr --ignore-unmatch $(ls | grep -vE '^(\d+|\d+\.\d+\.\d+|nightly)$')
           else
             git rm -fr --ignore-unmatch ${buildPath}
           fi
