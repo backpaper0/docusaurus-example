@@ -14,22 +14,37 @@ jobs:
         with:
           node-version: 18.x
       - run: npm ci
-      - run: npm run build -- --out-dir docs/latest
       - run: |
           git config --local user.email "209262+backpaper0@users.noreply.github.com"
           git config --local user.name "Uragami Taichi(GitHub Actions)"
-          git add docs/latest
+      - run: touch .sub-path
+        if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+      - run: echo /nightly > .sub-path
+        if: ${{ github.event_name == 'push' && github.ref_name == 'develop' }}
+      - run: echo /${github.event.number} > .sub-path
+        if: ${{ github.event_name == 'pull_request' }}
+      - run: echo /${github.ref_name} > .sub-path
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+      - run: BASE_URL_SUB_PATH=$(cat .sub-path) npm run build -- --out-dir docs$(cat .sub-path)
+      - run: |
+          buildPath=docs$(cat .sub-path)
+          git add ${buildPath}
           git stash
           git fetch --no-tags --depth=1 origin gh-pages
           git checkout gh-pages
-          if [ -d docs/latest ]; then
-            git rm -fr docs/latest
-            git commit -m "WIP"
-            git stash pop
-            git commit --amend -m "Update document"
+          if [ ${buildPath} = docs ] && ; then
+            # 以下の格納ディレクトリを除くファイル・ディレクトリを削除する
+            # nightly ... developブランチに対応
+            # セマンティックバージョン ... タグに対応
+            # 整数 ... プルリクエストに対応
+            git rm -fr --ignore-unmatch $(ls docs|grep -vE '^(\d+|\d+\.\d+\.\d+|nightly)$')
           else
-            git stash pop
-            git commit -m "Update document"
+            git rm -fr --ignore-unmatch ${buildPath}
           fi
+          if [ -n "$(git status --short)" ]; then
+            git commit -m "WIP"
+          fi
+          git stash pop
+          git commit --amend -m "Update document"
           git push origin gh-pages
 
