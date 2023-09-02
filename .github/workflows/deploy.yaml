@@ -16,11 +16,11 @@ jobs:
       - run: npm ci
       - run: npm run build -- --out-dir docs/latest
       - run: |
-          git config --local user.email 209262+backpaper0@users.noreply.github.com
+          git config --local user.email "209262+backpaper0@users.noreply.github.com"
           git config --local user.name "Uragami Taichi(GitHub Actions)"
-          git fetch --no-tags origin gh-pages
           git add docs/latest
           git stash
+          git fetch --no-tags --depth=1 origin gh-pages
           git checkout gh-pages
           if [ -d docs/latest ]; then
             git rm -fr docs/latest
@@ -31,5 +31,10 @@ jobs:
             git stash pop
             git commit -m "Update document"
           fi
+          echo **********
+          git status
+          git branchs --all
+          git remote -v
+          echo **********
           git push origin gh-pages
 
