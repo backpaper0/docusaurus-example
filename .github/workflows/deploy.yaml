@@ -31,10 +31,5 @@ jobs:
             git stash pop
             git commit -m "Update document"
           fi
-          echo **********
-          git status
-          git branch --all
-          git remote -v
-          echo **********
           git push origin gh-pages
 
