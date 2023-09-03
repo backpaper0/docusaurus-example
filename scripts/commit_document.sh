@@ -28,10 +28,12 @@ else
     git rm -fr --ignore-unmatch ${buildPath}
 fi
 
+ammend=""
 if [ -n "$(git status --short)" ]; then
     git commit -m "WIP"
+	ammend="--amend"
 fi
 
 git stash pop
 
-git commit --amend -m "Update document"
+git commit ${ammend} -m "Update document"
