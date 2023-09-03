@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set eox
+set -eux
 
 git rm -fr docs
 
