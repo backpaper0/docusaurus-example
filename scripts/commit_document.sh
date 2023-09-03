@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set eox
+
 git rm -fr docs
 
 git commit -m "Temporary"
