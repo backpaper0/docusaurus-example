@@ -47,24 +47,26 @@ jobs:
           buildPath=docs$(cat .sub-path)
           
           if [ ${buildPath} = docs ] ; then
-              # 以下の格納ディレクトリを除くファイル・ディレクトリを削除する
-              # nightly ... developブランチに対応
-              # セマンティックバージョン ... タグに対応
-              # 整数 ... プルリクエストに対応
-              cd docs
-              git rm -fr --ignore-unmatch $(ls | grep -vE '^(\d+|\d+\.\d+\.\d+|nightly)$')
-              cd ..
+            # 以下の格納ディレクトリを除くファイル・ディレクトリを削除する
+            # nightly ... developブランチに対応
+            # セマンティックバージョン ... タグに対応
+            # 整数 ... プルリクエストに対応
+            cd docs
+            git rm -fr --ignore-unmatch $(ls | grep -vE '^(\d+|\d+\.\d+\.\d+|nightly)$')
+            cd ..
           else
-              git rm -fr --ignore-unmatch ${buildPath}
+            git rm -fr --ignore-unmatch ${buildPath}
           fi
           
           ammend=""
+          git status
           if [ -n "$(git status --short)" ]; then
-              git commit -m "WIP"
+            git commit -m "WIP"
           	ammend="--amend"
           fi
           
           git stash pop
+          git status
           if [ -n "$(git status --short)" ]; then
             git commit ${ammend} -m "Update document"
             git push origin gh-pages
