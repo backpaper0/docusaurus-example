@@ -58,16 +58,12 @@ jobs:
             git rm -fr --ignore-unmatch ${buildPath}
           fi
           
-          ammend=""
-          git status
           if [ -n "$(git status --short)" ]; then
-            git commit -m "WIP"
-          	ammend="--amend"
+            git commit -m "Delete previous document"
           fi
           
           git stash pop
-          git status
           if [ -n "$(git status --short)" ]; then
-            git commit ${ammend} -m "Update document"
+            git commit -m "Update document"
             git push origin gh-pages
           fi
