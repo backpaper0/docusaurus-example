@@ -30,6 +30,8 @@ jobs:
       - run: echo /${{ github.event.number }} > .sub-path
         if: ${{ github.event_name == 'pull_request' }}
       - run: echo /${{ github.ref_name }} > .sub-path
+        if: ${{ github.event_name == 'push' && github.ref_type == 'tag' }}
+      - run: echo /${{ github.ref_name }} > .sub-path
         if: ${{ github.event_name == 'workflow_dispatch' }}
       - run: BASE_URL_SUB_PATH=$(cat .sub-path) npm run build -- --out-dir build$(cat .sub-path)
       - run: |
