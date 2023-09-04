@@ -8,7 +8,7 @@ const baseUrlSubPath = process.env.BASE_URL_SUB_PATH || '';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
+  title: 'Foo Foo Foo',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
